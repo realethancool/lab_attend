@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model LabSession {
+  id           String   @id @default(cuid())
+  date         DateTime
+  facultyName  String
+  branch       String
+  semester     String
+  subject      String
+  labName      String
+  pcSelection  String
+  inTime       DateTime
+  outTime      DateTime?
+  studentCount Int?
+  purpose      String?
+  remarks      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([date])
+  @@index([facultyName])
+  @@index([pcSelection])
+}
